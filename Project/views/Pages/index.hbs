@@ -1,7 +1,19 @@
-<div class="tittle-container">
-    <h1>Cards Games</h1>
-</div>
+<div class="main-wrapper">
+    <div class="header-section">
+        <h1>Cards Games</h1>
+        <p class="subtitle">Select a game</p>
+    </div>
 
-<div class = "phrase-container">
-    <p>Select a game</p>
+    <div class="card-grid">
+        {{#each cards}}
+            <div class="card">
+                <img src="{{this.image}}" class="card-img-top" alt="{{this.title}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <p class="card-text">{{this.description}}</p>
+                    <a href="{{this.link}}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
 </div>
