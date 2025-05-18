@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res) {
+  res.render('Pages/registerLogin',{tittle :' Welcome to the game!',layout:'layout',style:'registerLogin'});
+})
+
+/* GET selector game */
+router.get('/SelectionGame', function(req, res, next) {
   const cards = [
     {
       image: '/images/pinella.jpg',
@@ -23,7 +27,8 @@ router.get('/', function(req, res, next) {
       link: '/poker'
     }
   ];
-  res.render('Pages/index', { cards: cards});
+  res.render('Pages/selectionGame', { cards: cards,style:'selectionGame'});
 });
+
 
 module.exports = router;
