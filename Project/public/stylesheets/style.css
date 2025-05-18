@@ -89,3 +89,12 @@ body, html {
 .card-text {
   margin-bottom: 1rem;
 }
+
+.card-img-top {
+  height: 200px;        /* oppure 180px o 220px a seconda del look */
+  width: 100%;
+  object-fit: cover;    /* ritaglia l'immagine mantenendo proporzioni */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+

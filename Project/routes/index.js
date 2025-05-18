@@ -11,13 +11,13 @@ router.get('/', function(req, res, next) {
       link: '/pinella'
     },
     {
-      image: '/images/cards.jpg',
+      image: '/images/briscola.jpg',
       title: 'Briscola',
       description: 'Sfida il computer o un amico!',
       link: '/briscola'
     },
     {
-      image: '/images/cards.jpg',
+      image: '/images/poker.jpg',
       title: 'Poker',
       description: 'Texas Hold\'em e altro ancora.',
       link: '/poker'
