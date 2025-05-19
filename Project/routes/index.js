@@ -12,8 +12,6 @@ router.get('/', function (req, res) {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-
-  // ⚠️ utente non trovato
   if (!user) {
     return res.render('Pages/registerLogin', {
       title: 'Welcome to the game!',
@@ -24,8 +22,6 @@ router.post('/login', async (req, res) => {
   }
 
   const match = await bcrypt.compare(password, user.password);
-
-  // ⚠️ password errata
   if (!match) {
     return res.render('Pages/registerLogin', {
       title: 'Welcome to the game!',
@@ -69,19 +65,19 @@ router.get('/selectionGame', isAuthenticated, (req, res) => {
       image: '/images/pinella.jpg',
       title: 'Pinella',
       description: 'Gioca a Pinella con le regole classiche!',
-      link: '/pinella'
+      link: '/pinellaRoom'
     },
     {
       image: '/images/briscola.jpg',
       title: 'Briscola',
       description: 'Sfida il computer o un amico!',
-      link: '/briscola'
+      link: '/briscolaRoom'
     },
     {
       image: '/images/poker.jpg',
       title: 'Poker',
       description: 'Texas Hold\'em e altro ancora.',
-      link: '/poker'
+      link: '/pokerRoom'
     }
   ];
 
@@ -92,4 +88,8 @@ router.get('/selectionGame', isAuthenticated, (req, res) => {
   });
 });
 
+
+router.get('/pinellaRoom', isAuthenticated, (req, res) => {
+  res.render('Pages/pinellaCreateRoom', {title: 'Pinella game',style: 'pinellaCreateRoom'});
+})
 module.exports = router;
