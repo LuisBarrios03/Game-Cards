@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 })
 
 /* GET selector game */
-router.get('/SelectionGame', function(req, res, next) {
+router.get('/selectionGame', function(req, res, next) {
   const cards = [
     {
       image: '/images/pinella.jpg',
@@ -44,7 +44,7 @@ router.post('/register', async (req, res) => {
   try {
     await user.save();
     req.session.user = user; // login automatico
-    res.redirect('/games');  // o altra pagina
+    res.redirect('/selectionGame');  // o altra pagina
   } catch (err) {
     res.send('Errore nella registrazione');
   }
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
   if (!match) return res.send('Password errata');
 
   req.session.user = user;
-  res.redirect('/games');
+  res.redirect('/selectionGame');
 });
 
 
