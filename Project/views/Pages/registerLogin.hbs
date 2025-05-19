@@ -1,7 +1,19 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="auth-form-container" style="width: 100%; max-width: 500px;">
         <h2 class="text-center mb-4">Welcome</h2>
+        {{#if errorMessage}}
+            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                {{errorMessage}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{/if}}
 
+        {{#if successMessage}}
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                {{successMessage}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{/if}}
         <!-- Tabs -->
         <ul class="nav nav-tabs mb-3" id="authTabs" role="tablist">
             <li class="nav-item" role="presentation">

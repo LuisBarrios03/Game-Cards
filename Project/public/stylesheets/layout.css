@@ -20,6 +20,27 @@ body, html {
   z-index: 0;
 }
 
+.navbar {
+  background-color: #000 !important;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-toggle {
+  color: #fff !important;
+}
+
+.custom-dropdown {
+  background-color: #000 !important;
+  border: 1px solid #333;
+}
+
+.custom-dropdown .dropdown-item {
+  color: #fff !important;
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #222
 
 
 

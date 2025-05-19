@@ -7,8 +7,17 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const database = require("./Database/database");
+const session = require('express-session');
+
 const fs = require('fs');
 var app = express();
+
+app.use(session({
+  secret: 'Anon!m0u5.003', // scegli una chiave complessa
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // ⚠️ usa true solo se hai HTTPS
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
