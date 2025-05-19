@@ -1,0 +1,46 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background-image: url('/images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* trasparenza */
+  z-index: 0;
+}
+
+.navbar {
+  background-color: #000 !important;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-toggle {
+  color: #fff !important;
+}
+
+.custom-dropdown {
+  background-color: #000 !important;
+  border: 1px solid #333;
+}
+
+.custom-dropdown .dropdown-item {
+  color: #fff !important;
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #222
+
+
+
