@@ -90,6 +90,11 @@ router.get('/selectionGame', isAuthenticated, (req, res) => {
 
 
 router.get('/pinellaRoom', isAuthenticated, (req, res) => {
-  res.render('Pages/pinellaCreateRoom', {title: 'Pinella game',style: 'pinellaCreateRoom'});
+  res.render('Pages/pinellaRoom', {
+    title: 'Pinella game',
+    layout:'layout',
+    style: 'CreateJoinRoom',
+    user:req.session.user,
+    game:'Pinella'});
 })
 module.exports = router;

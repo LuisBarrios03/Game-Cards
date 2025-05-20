@@ -1,0 +1,81 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 60px); padding-top: 60px;">
+<div class="bg-white p-5 rounded shadow" style="max-width: 450px; width: 100%;">
+        <h2 class="text-center mb-4">{{game}} Game</h2>
+
+        <ul class="nav nav-tabs mb-4" id="roomTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="create-tab" data-bs-toggle="tab" data-bs-target="#create" type="button" role="tab">Create room</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="join-tab" data-bs-toggle="tab" data-bs-target="#join" type="button" role="tab">Join room</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="roomTabsContent">
+            <!-- CREA STANZA -->
+            <div class="tab-pane fade show active" id="create" role="tabpanel">
+                <form action="/pinella/create" method="POST">
+                    <div class="mb-3">
+                        <label for="nicknameCreate" class="form-label">Nickname</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="nicknameCreate"
+                                name="nickname"
+                                value="{{user.nickname}}"
+                                readonly
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="playerCount" class="form-label">Total number of players</label>
+                        <select class="form-select" id="playerCount" name="playerCount" required>
+                            <option value="2">2 players</option>
+                            <option value="3">3 players</option>
+                            <option value="4">4 players</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cpuCount" class="form-label">Number of CPUs</label>
+                        <select class="form-select" id="cpuCount" name="cpuCount" required>
+                            <option value="0">Nothing CPU</option>
+                            <option value="1">1 CPU</option>
+                            <option value="2">2 CPU</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100">Create</button>
+                </form>
+            </div>
+
+            <!-- JOIN STANZA -->
+            <div class="tab-pane fade" id="join" role="tabpanel">
+                <form action="/pinella/join" method="POST">
+                    <div class="mb-3">
+                        <label for="nicknameJoin" class="form-label">Nickname</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="nicknameJoin"
+                                name="nickname"
+                                value="{{user.nickname}}"
+                                readonly
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="roomCode" class="form-label">Code room</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="roomCode"
+                                name="roomCode"
+                                required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Join</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

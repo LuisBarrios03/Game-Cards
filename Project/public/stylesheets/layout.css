@@ -1,3 +1,4 @@
+/* ----- IMPOSTAZIONI GENERALI ----- */
 body, html {
   margin: 0;
   padding: 0;
@@ -8,20 +9,32 @@ body, html {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  position: relative;
+  z-index: 0;
 }
 
+/* ----- OVERLAY SCURO ----- */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* trasparenza */
-  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0; /* sotto a tutto tranne navbar/contenuto */
 }
 
+/* ----- CONTENUTO SOPRA OVERLAY ----- */
+main, .content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ----- NAVBAR ----- */
 .navbar {
   background-color: #000 !important;
+  position: relative;
+  z-index: 3;
 }
 
 .navbar-brand,
@@ -30,9 +43,11 @@ body, html {
   color: #fff !important;
 }
 
+/* Dropdown personalizzato */
 .custom-dropdown {
   background-color: #000 !important;
   border: 1px solid #333;
+  z-index: 9999;
 }
 
 .custom-dropdown .dropdown-item {
@@ -40,7 +55,29 @@ body, html {
 }
 
 .custom-dropdown .dropdown-item:hover {
-  background-color: #222
+  background-color: #222;
+}
 
+/* ----- FORMS & BUTTONS ----- */
+.form-control,
+.form-select {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
 
+.btn-dark {
+  background-color: #212529;
+  border: none;
+  transition: background-color 0.3s ease;
+}
 
+.btn-dark:hover {
+  background-color: #343a40;
+}
+.navbar-nav .dropdown-toggle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}

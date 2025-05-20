@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 // GET: mostra form di creazione stanza
 router.get('/create', (req, res) => {
-    res.render('Pages/pinellaCreateRoom.hbs', {
+    res.render('Pages/CreateJoinRoom.hbs', {
         title: 'Crea una stanza',
         style: 'pinellaCreateRoom',
     });

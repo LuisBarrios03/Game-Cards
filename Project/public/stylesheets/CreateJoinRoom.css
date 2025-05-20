@@ -1,0 +1,21 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-control, .form-select {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+
+.btn-dark {
+    background-color: #212529;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #343a40;
+}
