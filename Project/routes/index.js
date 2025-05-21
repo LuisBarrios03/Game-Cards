@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
+const Room = require('../models/room');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 
 
@@ -90,11 +91,30 @@ router.get('/selectionGame', isAuthenticated, (req, res) => {
 
 
 router.get('/pinellaRoom', isAuthenticated, (req, res) => {
-  res.render('Pages/pinellaRoom', {
+  res.render('Pages/PinellaGame/pinellaRoom', {
     title: 'Pinella game',
     layout:'layout',
     style: 'CreateJoinRoom',
     user:req.session.user,
     game:'Pinella'});
-})
+
+
+});
+
+router.get('/pinella/wait/:roomCode', isAuthenticated, async (req, res) => {
+  const { roomCode } = req.params;
+  const room = await Room.findOne({ code: roomCode });
+
+  if (!room) {
+    return res.status(404).send('Room not found');
+  }
+
+  res.render('Pages/PinellaGame/pinellaGame', {
+    /*layout: 'layout',
+    */style: 'pinellaGame',
+    room,
+    user: req.session.user
+  });
+});
+
 module.exports = router;

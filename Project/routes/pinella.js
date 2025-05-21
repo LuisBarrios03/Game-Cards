@@ -1,33 +1,54 @@
+// 📁 routes/pinella.js
 const express = require('express');
 const router = express.Router();
-const crypto = require('crypto');
+const Room = require('../models/Room');
+const Player = require('../models/player');
+const isAuthenticated = require('../middlewares/isAuthenticated');
+const generateRoomCode = require('../utils/generateRoomCode');
 
-// GET: mostra form di creazione stanza
-router.get('/create', (req, res) => {
-    res.render('Pages/CreateJoinRoom.hbs', {
-        title: 'Crea una stanza',
-        style: 'pinellaCreateRoom',
-    });
-});
+// ✅ Crea stanza
+router.post('/pinella/create', isAuthenticated, async (req, res) => {
+    const { playerCount, cpuCount } = req.body;
+    const nickname = req.session.user.nickname;
+    const totalPlayers = parseInt(playerCount);
+    const totalCPUs = parseInt(cpuCount);
 
-// POST: crea la stanza e redirige alla lobby
-router.post('/create', (req, res) => {
-    const { nickname, playerCount, cpuCount } = req.body;
-    const roomCode = crypto.randomBytes(3).toString('hex').toUpperCase(); // esempio: 4D2A8F
+    try {
+        // 1. Genera codice stanza unico
+        let roomCode;
+        do {
+            roomCode = generateRoomCode();
+        } while (await Room.findOne({ code: roomCode }));
 
-    // Salva la stanza in memoria (può diventare un DB)
-    req.app.locals.rooms = req.app.locals.rooms || {};
-    req.app.locals.rooms[roomCode] = {
-        players: [{ nickname }],
-        cpuCount: parseInt(cpuCount),
-        maxPlayers: parseInt(playerCount),
-        isStarted: false
-    };
+        // 2. Crea stanza
+        const newRoom = new Room({
+            code: roomCode,
+            owner: nickname,
+            players: [{ nickname, isCPU: false }],
+            maxPlayers: totalPlayers,
+            gameStarted: false
+        });
 
-    // Salva nickname in sessione
-    req.session.user = { nickname };
+        // 3. Aggiungi CPU (se richiesto)
+        for (let i = 1; i <= totalCPUs; i++) {
+            newRoom.players.push({ nickname: `CPU-${i}`, isCPU: true });
+        }
 
-    res.redirect(`/pinella/room/${roomCode}`);
+        await newRoom.save();
+
+        // 4. Aggiungi player anche nella collezione "players" per tracking socket
+        await Player.create({
+            nickname,
+            roomCode,
+            socketId: null, // verrà aggiornato al collegamento
+            isCPU: false
+        });
+
+        res.redirect(`/pinella/wait/${roomCode}`);
+    } catch (error) {
+        console.error('Errore creazione stanza:', error);
+        res.status(500).send('Errore nella creazione della stanza');
+    }
 });
 
 module.exports = router;
