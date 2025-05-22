@@ -8,6 +8,16 @@ var app = require('../app');
 var debug = require('debug')('project:server');
 var http = require('http');
 
+// 👉 socket.io viene creato qui
+const { Server } = require('socket.io');
+const io = new Server(server);
+
+// 👉 se vuoi accedere a io dentro le route
+app.set('io', io);
+
+// 👉 collega il file socketHandler
+require('../socket/socketHandler')(io);
+
 /**
  * Get port from environment and store in Express.
  */

@@ -110,8 +110,7 @@ router.get('/pinella/wait/:roomCode', isAuthenticated, async (req, res) => {
   }
 
   res.render('Pages/PinellaGame/pinellaGame', {
-    /*layout: 'layout',
-    */style: 'pinellaGame',
+    layout: 'layout',
     room,
     user: req.session.user
   });
