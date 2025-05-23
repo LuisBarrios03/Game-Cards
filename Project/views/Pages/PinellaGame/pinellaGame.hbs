@@ -1,1 +1,16 @@
+
 <script src="/javascripts/socket.io.js"></script>
+<script>
+    const socket = io(); // ✅ ora è definito
+
+    const nickname = "{{user.nickname}}";
+    const roomCode = "{{room.code}}";
+
+    if (nickname && roomCode) {
+        socket.emit('joinRoom', { roomCode, nickname });
+    }
+
+    socket.on('playerJoined', ({ nickname }) => {
+        console.log(`${nickname} si è unito alla stanza!`);
+    });
+</script>

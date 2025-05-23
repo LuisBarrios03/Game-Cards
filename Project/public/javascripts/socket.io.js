@@ -1,6 +1,3 @@
-
-const socket = io();
-
 // Esempio di join automatico (puoi adattarlo)
 const nickname = "{{user.nickname}}";
 const roomCode = "{{room.code}}"; // Assicurati che il dato sia passato alla view
